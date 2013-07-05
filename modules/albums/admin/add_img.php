@@ -44,11 +44,12 @@ if ( $id != 0 )
 
 if ( $nv_Request->get_int( 'add', 'post' ) == 1 )
 {
-    $data['name'] = filter_text_input( 'name', 'post', '', 1 );
+    $data['name'] = $nv_Request->get_title( 'name', 'post', '', 1 );
     $thumb_name = "";
     $data['albumid'] = $nv_Request->get_int( 'album', 'post' );
-    $data['path'] = filter_text_input( 'pic_path', 'post', '', 0 );
-    $data['description'] = filter_text_textarea( 'description', '', NV_ALLOWED_HTML_TAGS );
+	$data['path'] = $nv_Request->get_title( 'pic_path', 'post', '' );
+	$data['description'] = $nv_Request->get_title( 'description', 'post', '', 1 );  
+	
     if ( $data['albumid'] > 0 )
     {
         if ( empty( $data['path'] ) )

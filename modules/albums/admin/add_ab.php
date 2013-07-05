@@ -36,12 +36,14 @@ if($id != 0)
 }
 if($nv_Request->get_int('add', 'post') == 1)
 {
-	$data['name'] = filter_text_input('name', 'post', '', 1);
+	//$data['name'] = filter_text_input('name', 'post', '', 1);
+	
+	$data['name'] = $nv_Request->get_title( 'name', 'post', '', 1 );
 	$alias = change_alias($data['name']);
-	$data['description'] = filter_text_textarea('description', '', NV_ALLOWED_HTML_TAGS);
-	$data['path_img'] = filter_text_input('pic_path', 'post', '', 0);
-	$data['active'] = filter_text_input('active', 'post', '0', 0);
-
+	$data['description'] = $nv_Request->get_title( 'description', 'post', '', 1 );	
+	$data['path_img'] = $nv_Request->get_title( 'path_img', 'post', '', 1 );
+	$data['active'] = $nv_Request->get_title( 'active', 'post', '', 1 );
+	
 	if(!nv_is_url($data['path_img']) and file_exists(NV_DOCUMENT_ROOT . $data['path_img']))
 	{
 		$lu = nv_strlen(NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $module_name . "/");
